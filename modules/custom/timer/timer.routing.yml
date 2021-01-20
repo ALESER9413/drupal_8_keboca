@@ -1,0 +1,11 @@
+timer.routing:
+  # The path always starts with a leading forward-slash.
+  path: '/timer'
+  # Defines the default properties of a route.
+  defaults:
+    # For page callbacks that return a render array use _controller.
+    _controller: '\Drupal\timer\Controller\TimerController::index'
+    _title: 'Timer Page'
+  # Require a permission to access this route.
+  requirements:
+    _permission: 'access content'

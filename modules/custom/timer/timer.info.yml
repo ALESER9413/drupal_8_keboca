@@ -1,0 +1,7 @@
+name: 'Timer Module'
+type: module
+description: 'An timer consumer'
+package: 'Custom'
+core: '8.x'
+dependencies:
+- block
