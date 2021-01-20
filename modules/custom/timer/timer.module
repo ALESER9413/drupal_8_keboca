@@ -1,6 +1,7 @@
 <?php
 
-	/**
-	 * @file
-	 * Example module.
-	 */
+function timer_page_attachments(array &$attachments) {
+
+  var_dump("dedededecwf dwqefew" );
+  $attachments['#attached']['library'][] = 'timer/custom_js';
+}

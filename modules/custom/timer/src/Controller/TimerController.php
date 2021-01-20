@@ -21,22 +21,23 @@
 			$place_three_datetime = $this->api_url("Europe/Belgrade");
 
 			return [
-				'#markup' => $this->t('<table style="width:100%">
+				'#markup' => $this->t(' 
+				<table style="width:100%">
 				<tr>
 				  <th>Place</th>
 				  <th>Date</th>
 				</tr>
 				<tr>
 				  <td>San Jose, CR</td>
-				  <td>'. $this->format_date( $place_one_datetime->datetime ) .'</td>
+				  <td id="td_sj">'. $this->format_date( $place_one_datetime->datetime ) .'</td>
 				</tr>
 				<tr>
 				  <td>New York, USA</td>
-				  <td>'. $this->format_date( $place_two_datetime->datetime ) .'</td>
+				  <td id="td_ny">'. $this->format_date( $place_two_datetime->datetime ) .'</td>
 				</tr>
 				<tr>
 				  <td>Belgrado, Serbia</td>
-				  <td>'. $this->format_date( $place_three_datetime->datetime ) .'</td>
+				  <td id="td_blg">'. $this->format_date( $place_three_datetime->datetime ) .'</td>
 				</tr>
 			  </table>'),
 			];
@@ -44,9 +45,20 @@
 
 		private function api_url( $place ){
 
-			$response = file_get_contents( 'http://worldtimeapi.org/api/timezone/' . $place );
-			
-			return json_decode($response);
+			$url = 'https://worldtimeapi.org/api/timezone/' . $place;
+
+			//  Initiate curl
+			$ch = curl_init();
+			// Will return the response, if false it print the response
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			// Set the url
+			curl_setopt($ch, CURLOPT_URL,$url);
+			// Execute
+			$result=curl_exec($ch);
+			// Closing
+			curl_close($ch);
+
+			return json_decode($result);
 
 		}
 
